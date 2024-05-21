@@ -1,0 +1,43 @@
+<app-not-found
+    [visible]="!doughnut.id"
+    notFoundMessage="Doughnut Not Found"
+    resetLinkText="Back To Homepage">
+</app-not-found>
+<div *ngIf="doughnut.id" class="container">
+    <img [src]="doughnut.imageUrl" [alt]="doughnut.name"/>
+
+    <div class="details">
+        <div class="header">
+            <span class="name">{{ doughnut.name }}</span>
+            <span class="favorite {{ doughnut.favorite? '' : 'not'}}"><i class="bi bi-heart"></i></span>
+        </div>
+        <div class="rating">
+            <star-rating
+            [value]="doughnut.stars"
+            [totalstars]="5"
+            checkedcolor="red"
+            uncheckedcolor="black"
+            size="1.6rem"
+            [readonly]="true"
+            >
+            </star-rating>
+        </div>
+
+        <div class="origins">
+            <span *ngFor="let origin of doughnut.origins">{{ origin }}</span>
+        </div>
+
+        <div class="cook-time">
+            <span>
+                Time to cook about <strong>{{ doughnut.cookTime }}</strong>
+                minutes
+            </span>
+        </div>
+
+        <div class="price">
+            <span>{{ doughnut.price | currency }}</span>
+        </div>
+
+        <button (click)="addToCart()">Add To Cart</button>
+    </div>
+</div>
